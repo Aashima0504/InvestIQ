@@ -10,8 +10,6 @@ def generate_signals(df: pd.DataFrame) -> pd.DataFrame:
     """
     data = df.copy()
     data['Future_Return'] = data['Close'].shift(-10) / data['Close'] - 1
-    
-    # Binary classification: Buy if return > 0, else Sell (No Hold)
     data['Target'] = np.where(data['Future_Return'] > 0, 1, -1)
     return data.dropna()
 
